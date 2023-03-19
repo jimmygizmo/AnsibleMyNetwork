@@ -1,0 +1,23 @@
+https://www.ansible.com/blog/getting-started-with-ansible-and-check-point
+
+Use cp_mgmt_* modules, introduced in Ansible 2.9
+
+(We don't want the legacy checkpoint_* from Ansible 2.9 - deprecated)
+
+THE CHECKPOINT MANAGEMENT COLLECTION
+https://galaxy.ansible.com/check_point/mgmt
+
+INSTALL:
+ansible-galaxy collection install check_point.mgmt
+
+-------
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/download/check_point-mgmt-4.0.0.tar.gz to /Users/bilbo/.ansible/tmp/ansible-local-89198n8l6159i/tmpmcc4de0v/check_point-mgmt-4.0.0-amez8oeb
+Installing 'check_point.mgmt:4.0.0' to '/Users/bilbo/.ansible/collections/ansible_collections/check_point/mgmt'
+check_point.mgmt:4.0.0 was installed successfully
+--------
+
+** NOTE: as before, installation was under the user home directory. See comments on this in Palo Alto Networks notes.
+

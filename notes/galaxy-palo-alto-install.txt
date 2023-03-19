@@ -1,0 +1,15 @@
+(ve.ansimy) ➜  AnsibleMyEC2 git:(main) ✗ ansible-galaxy collection install paloaltonetworks.panos
+
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/download/paloaltonetworks-panos-2.13.3.tar.gz to /Users/bilbo/.ansible/tmp/ansible-local-78592f9en2n36/tmp23991n_e/paloaltonetworks-panos-2.13.3-kl2anetb
+Installing 'paloaltonetworks.panos:2.13.3' to '/Users/bilbo/.ansible/collections/ansible_collections/paloaltonetworks/panos'
+paloaltonetworks.panos:2.13.3 was installed successfully
+
+(ve.ansimy) ➜  AnsibleMyEC2 git:(main) ✗
+
+NOTE where it was installed. IN THE USER'S HOME DIRECTORY UNDER /.ansible/
+See notes about this in:
+/playbooks/network/ansible-galaxy-list.txt
+

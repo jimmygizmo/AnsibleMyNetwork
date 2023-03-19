@@ -1,0 +1,11 @@
+
+Default user/pass for Palo Alto Network devices is admin/admin
+
+
+curl -k -X POST 'https://192.168.1.128/api/?type=keygen&user=admin&password=admin'
+
+This API call should return a “success” and give you an API key.
+
+curl -k -X POST 'https://192.168.1.128/api/?type=keygen&user=admin&password=admin'
+<response status = 'success'><result><key>LUFRPT14MW5xOEo1R09KVlBZNnpnemh0VHRBOWl6TGM9bXcwM3JHUGVhRlNiY0dCR0srNERUQT09</key></result></response>%
+

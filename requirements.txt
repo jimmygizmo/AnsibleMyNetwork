@@ -1,0 +1,8 @@
+# requirements.txt
+
+ansible
+
+
+# For AWS (only if you need to automate against AWS):
+# boto3
+

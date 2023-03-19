@@ -1,0 +1,50 @@
+These notes cover research sources for Ansible network automation and also simulate network devices to use for
+automation development and similar topics. The goal is to develop some useful playbooks for common routure and
+load balancer tasks on mostly Cisco equipment. Goals may expand later beyond this focus.
+
+https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/network_cli_connection.html
+
+https://www.packetswitch.co.uk/ansible-with-cisco/
+
+https://docs.ansible.com/ansible/latest/network/getting_started/network_differences.html
+
+https://docs.ansible.com/ansible/latest/network/user_guide/network_best_practices_2.5.html
+
+----------------------------------------------------------------------------------------------------------------------
+GITHUB PROJECT: CONTAINERS RUNNING POPULAR ROUTERS AND OTHER NETWORKING APPLIANCES (SIMULATED)
+For labs for automation or CI/CD development.
+https://github.com/vrnetlab/vrnetlab
+
+Cisco routers available to simulate: (they have a handful from other vendors as well)
+------------------------------------
+Cisco CSR1000v
+Cisco Nexus NX-OS (using Titanium emulator)
+Cisco XRv
+Cisco XRv 9000
+
+A good article on this project and using it for automation:
+https://ttl255.com/vrnetlab-run-virtual-routers-in-docker-containers/
+----------------------------------------------------------------------------------------------------------------------
+
+EXCELLENT: GNS3 Article: ** NOTE This is from 2014 but still worth a close look.
+https://www.digiampietro.com/2014/1109/cisco_network_emulation_gns3_docker_container.html
+
+-------------------------------------------------------
+
+Interesting links, less-directly relevant.
+Generally, using Cisco Packet Trace is very valuable. ** I'm looking to see if it is possible to automate against
+emulated devices running inside Packet Trace .. FROM THE OUTSIDE. That would be amazing. Then I could develop
+Ansible from a VE or a container and operate against nearly-real devices in a nearly-real simulated network.
+I'm hoping this is possible and I will updated here as I investigate.
+TODO: Update on the ability to connect from the outside, in to devices emulated inside Cisco Packet Trace.
+
+SEEMS THEORETICALLY POSSIBLE .. BUT REQUIRES INTERFACE (PROBABLY ON LINUX) IN PROMUSCIOUS MODE. (KERNEL)
+https://www.packettracernetwork.com/features/real-network-connection.html
+
+* NOTE: There are many other emulation/simulation options to automate/test/dev against, but some have special
+hardware requirements, such as needing a physical Linux or Windows host to run on. Others require a paid license.
+
+---------------------------------------------------------------
+Interesting Cisco Packet Trace video:
+https://www.youtube.com/watch?v=u7ooPBUQj-8
+

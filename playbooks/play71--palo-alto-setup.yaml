@@ -1,0 +1,72 @@
+---
+# play71--palo-alto-setup.yaml
+
+- name: Play71 - Palo Alto Networks Device Setup
+#  vars:
+#    hosts: grouppaloalto
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: local
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    ####
+    - name: T01 - First Connect - admin/admin
+      palo_provider:
+        api_key: LUFRPT14MW5xOEo1R09KVlBZNnpnemh0VHRBOWl6TGM9bXcwM3JHUGVhRlNiY0dCR0srNERUQT09
+#        api_key: {{ device_api_key }}
+        ip_address: {{ ansible_host }}
+      adminusername: admin
+      adminpassword: admin
+      register: out_first_conn
+    - name: T01-out
+      debug:
+        var: out_first_conn.stdout_lines
+    ####
+    - name: T02 - DNS and Panorama Settings
+      panos_mgtconfig:
+        provider: '{{ palo_provider }}'
+        dns_server_primary: '{{ dns_primary_ip }}'
+        dns_server_secondary: '{{ dns_secondary_ip }}'
+        panorama_primary: '{{ panorama_primary_ip }}'
+        panorama_secondary: '{{ panorama_secondary_ip }}'
+        commit: false
+      register: dns_panorama_out
+    - name: T02-out
+      debug:
+        var: dns_panorama_out.stdout_lines
+    ####
+    - name: T03 - Alternate Admin User Account
+      panos_administrator:
+        provider: '{{ palo_provider }}'
+        admin_username: '{{ adminusername }}'
+        admin_password: '{{ adminpassword }}'
+        superuser: true
+        commit: false
+      register: alt_admin_out
+    - name: T03-out
+      debug:
+        var: alt_admin_out.stdout_lines
+    ####
+    - name: T04 - Set Ethernet1/1 as Static in Outside Zone
+      panos_interface:
+        provider: '{{ palo_provider }}'
+        if_name: "ethernet1/1"
+        mode: "layer3"
+        ip: "{{ ip.ethernet1 }}"
+        enable_dhcp: false
+        zone_name: "Outside"
+      register: eth1_static
+    - name: T04-out
+      debug:
+        var: eth1_static.stdout_lines
+    ####
+    - name: T05 - Commit Tasks T01 through T04
+      panos_commit_firewall:
+        provider: '{{ palo_provider }}'
+      register: commit_1_thru_4
+    - name: T05-out
+      debug:
+        var: commit_1_thru_4.stdout_lines
+    ####
+

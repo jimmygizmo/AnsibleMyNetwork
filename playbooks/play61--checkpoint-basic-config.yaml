@@ -1,0 +1,24 @@
+---
+# play61--checkpoint-basic-config.yaml
+
+- name: Play61 - Checkpoint Basic Configuration
+  #  vars:
+  #    hosts: groupcheckpoint
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: httpapi
+  collections:
+    - check_point.mgmt
+  tasks:
+    ####
+    - name: Create host object
+    cp_mgmt_host:
+      color: dark green
+      ipv4_address: 192.0.2.2
+      #		  name: New CP_MGMT Host 1
+      state: present
+      auto_publish_session: true
+      ####
+
+...
+

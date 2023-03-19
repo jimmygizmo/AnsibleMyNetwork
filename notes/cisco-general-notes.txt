@@ -1,0 +1,82 @@
+How to configure SSH on a Cisco Router and Switch using Packet Tracer | CCNA | Networking
+
+https://www.youtube.com/watch?v=JdKzZ3Cdc8M
+
+
+-----------------------------------------
+Router 2911
+Switch 2960-24TT
+
+
+------------------------------------------
+CLI on 2911 router: (example is over mgmt port (VLAN) interface as no ethernet is up yet)
+
+https://youtu.be/JdKzZ3Cdc8M?t=190
+"... just go to the USER PRIVILEGED MODE (enable) and the GLOBAL CONFIGURATION MODE (configure terminal)..."
+
+> enable
+
+> configure terminal
+
+> interface GigabitEthernet 0/0
+
+> no shutdown
+
+>
+- - - - - - - - - - - -  
+LOG FROM EMULATOR - IOS CLI:
+Router>enable
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface GigabitEthernet 0/0
+Router(config-if)#no shutdown
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+- - - - - - - - - - - -  
+
+********* NOTE: We entered a config sort of edit mode and 'no shutdown' although
+the name is not aligned with the action, seems to be how to activate the new
+config, bring the IF up and exit the config mode as we arrive after a few ENTERs
+at the earlier prompt of just:
+
+Router>
+
+###############################################################
+Next we assign IP addresses as currently we cannot access the router or 
+switch from the laptop via any of the physically linked interfaces which
+are now working at the physical layer (1). I would think they are also working
+at the the Data Link Layer (2) , but not at the Network Layer (3), until we perform the next steps.
+-- Actually perhaps since we have specific ports connected and working physically
+then we might also have a working Network Layer (3) since that has to do with
+the 'physical path' and I would say our ethernet physical connections have
+established that. The next layer up is layer 4, the Transport Layer and that has
+to do with Data Transmission using protocols such as TCP and UDP, and we
+know that will not happen without assigning IP addresses, well at least not
+for full data transmission. Some broadcast packets would of course be arriving.
+
+We have selected some addresses and ranges:
+2911 Router 0 -- 10.10.1.1/28
+
+2960-24TT Switch 0 -- VLAN1: 10.10.1.10/28
+
+Laptop-PT Laptop 0 -- 10.10.1.2/28
+
+https://youtu.be/JdKzZ3Cdc8M?t=273
+#################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+

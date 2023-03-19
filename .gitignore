@@ -1,3 +1,21 @@
+
+
+# ansible.cfg will contain sensitive information and so it is excluded from the repo.
+# The user is to copy  TEMPLATE--anisble.cfg  --->  anisble.cfg
+# Customize your ansible.cfg. Never put sensitive information into the TEMPLATE file.
+ansible.cfg
+
+# inventory.yaml will contain sensitive information and so it is excluded from the repo.
+# The user is to copy  TEMPLATE--inventory.yaml  --->  inventory.yaml
+# Customize your inventory.yaml. Never put sensitive information into the TEMPLATE file.
+inventory.yaml
+
+# THE ORDER OF THE FOLLOWING IS IMPORTANT! If we put secrets/* after, this does not work:
+secrets/*
+!secrets/.gitkeep
+
+.idea
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -82,7 +100,7 @@ profile_default/
 ipython_config.py
 
 # pyenv
-.python-version
+#.python-version
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.

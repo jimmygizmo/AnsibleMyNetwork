@@ -1,0 +1,268 @@
+INITIAL NOTES TO AUTOMATE INSTALLATION AND CONFIGURATION OF SNMPD ONTO AN EC2 INSTANCE.
+
+INSTALL STEPS:
+
+sudo yum update
+* This was a big update but was smooth. ** I had to restart my stack after this (docker-compose up)
+
+sudo yum install net-snmp
+
+which snmpd
+sudo snmpd -h
+sudo snmpd -H
+
+************ SolarWinds Agent will automatically configure SNMPD by default I think, so
+if you are using SolarWinds, look to that method.
+This is more experimental for the time being and for those who want to install and configure SNMPD for a more
+custom system and leverage Ansible for the automation.
+
+======================================================
+
+[ec2-user ~]$ which snmpd
+/usr/sbin/snmpd
+[ec2-user ~]$ sudo snmpd -h
+
+Usage:  snmpd [OPTIONS] [LISTENING ADDRESSES]
+
+	Version:  5.7.2
+	Web:      http://www.net-snmp.org/
+	Email:    net-snmp-coders@lists.sourceforge.net
+
+  -a			log addresses
+  -A			append to the logfile rather than truncating it
+  -c FILE[,...]		read FILE(s) as configuration file(s)
+  -C			do not read the default configuration files
+			  (config search path: /etc/snmp:/usr/share/snmp:/usr/lib64/snmp:/root/.snmp)
+  -d			dump sent and received SNMP packets
+  -D[TOKEN[,...]]	turn on debugging output for the given TOKEN(s)
+			  (try ALL for extremely verbose output)
+			  Don't put space(s) between -D and TOKEN(s).
+  -f			do not fork from the shell
+  -g GID		change to this numeric gid after opening
+			  transport endpoints
+  -h, --help		display this usage message
+  -H			display configuration file directives understood
+  -I [-]INITLIST	list of mib modules to initialize (or not)
+			  (run snmpd with -Dmib_init for a list)
+  -L <LOGOPTS>		toggle options controlling where to log to
+	e:           log to standard error
+	o:           log to standard output
+	n:           don't log at all
+	f file:      log to the specified file
+	s facility:  log to syslog (via the specified facility)
+
+	(variants)
+	[EON] pri:   log to standard error, output or /dev/null for level 'pri' and above
+	[EON] p1-p2: log to standard error, output or /dev/null for levels 'p1' to 'p2'
+	[FS] pri token:    log to file/syslog for level 'pri' and above
+	[FS] p1-p2 token:  log to file/syslog for levels 'p1' to 'p2'
+  -m MIBLIST		use MIBLIST instead of the default MIB list
+  -M DIRLIST		use DIRLIST as the list of locations to look for MIBs
+			  (default $HOME/.snmp/mibs:/usr/share/snmp/mibs)
+  -p FILE		store process id in FILE
+  -q			print information in a more parsable format
+  -r			do not exit if files only accessible to root
+			  cannot be opened
+  -u UID		change to this uid (numeric or textual) after
+			  opening transport endpoints
+  -v, --version		display version information
+  -V			verbose display
+  -x ADDRESS		use ADDRESS as AgentX address
+  -X			run as an AgentX subagent rather than as an
+			  SNMP master agent
+
+Deprecated options:
+  -l FILE		use -Lf <FILE> instead
+  -P			use -p instead
+  -s			use -Lsd instead
+  -S d|i|0-7		use -Ls <facility> instead
+
+[ec2-user ~]$ sudo snmpd -H
+Configuration directives understood:
+  In snmpd.conf and snmpd.local.conf:
+    authtrapenable           1 | 2		(1 = enable, 2 = disable)
+    trapsink                 host [community] [port]
+    trap2sink                host [community] [port]
+    informsink               host [community] [port]
+    trapsess                 [snmpcmdargs] host
+    trapcommunity            community-string
+    v1trapaddress            string
+    agentuser                userid
+    agentgroup               groupid
+    agentaddress             SNMP bind address
+    quit                     (1|yes|true|0|no|false)
+    leave_pidfile            (1|yes|true|0|no|false)
+    dontLogTCPWrappersConnects (1|yes|true|0|no|false)
+    maxGetbulkRepeats        integerValue
+    maxGetbulkResponses      integerValue
+    injectHandler            injectHandler NAME INTONAME [BEFORE_OTHER_NAME]
+    table                    tableoid
+    add_row                  table_name indexes... values...
+    agentxsocket             AgentX bind address
+    master                   specify 'agentx' for AgentX support
+    agentxperms              AgentX socket permissions: socket_perms [directory_perms [username|userid [groupname|groupid]]]
+    agentxRetries            AgentX Retries
+    agentxTimeout            AgentX Timeout (seconds)
+    com2sec                  [-Cn CONTEXT] secName IPv4-network-address[/netmask] community
+    com2sec6                 [-Cn CONTEXT] secName IPv6-network-address[/netmask] community
+    com2secunix              [-Cn CONTEXT] secName sockpath community
+    perl                     PERLCODE
+    perlInitFile             string
+    disablePerl              (1|yes|true|0|no|false)
+    certSecName              certSecName PRIORITY FINGERPRINT [--shaNN|md5] <--sn SECNAME | --rfc822 | --dns | --ip | --cn | --any>
+    snmpTlstmParams          snmpTlstmParams targetParamsName hashType:fingerPrint
+    snmpTlstmAddr            snmpTlstmAddr targetAddrName hashType:fingerprint serverIdentity
+    smuxpeer                 OID-IDENTITY PASSWORD
+    smuxsocket               SMUX bind address
+    createUser               username [-e ENGINEID] (MD5|SHA) authpassphrase [DES [privpassphrase]]
+    agentSecName             string
+    iquerySecName            string
+    iqueryVersion            1 | 2c | 3
+    iquerySecLevel           noAuthNoPriv | authNoPriv | authPriv
+    group                    name v1|v2c|usm|... security
+    access                   name context model level prefix read write notify
+    setaccess                name context model level prefix viewname viewval
+    view                     name type subtree [mask]
+    authcommunity            authtype1,authtype2 community [default|hostname|network/bits [oid|-V view [context]]]
+    authuser                 authtype1,authtype2 [-s secmodel] user [noauth|auth|priv [oid|-V view [context]]]
+    authgroup                authtype1,authtype2 [-s secmodel] group [noauth|auth|priv [oid|-V view [context]]]
+    authaccess               name authtype1,authtype2 [-s secmodel] group view [noauth|auth|priv [context|context*]]
+    rwcommunity              community [default|hostname|network/bits [oid|-V view [context]]]
+    rocommunity              community [default|hostname|network/bits [oid|-V view [context]]]
+    rwcommunity6             community [default|hostname|network/bits [oid|-V view [context]]]
+    rocommunity6             community [default|hostname|network/bits [oid|-V view [context]]]
+    rwuser                   user [noauth|auth|priv [oid|-V view [context]]]
+    rouser                   user [noauth|auth|priv [oid|-V view [context]]]
+    diskio                   path | device
+    diskio_exclude_fd        (1|yes|true|0|no|false)
+    diskio_exclude_loop      (1|yes|true|0|no|false)
+    diskio_exclude_ram       (1|yes|true|0|no|false)
+    sendmail_config          file
+    sendmail_stats           file
+    sendmail_queue           directory
+    sendmail_index           integer
+    sendmail_stats_t         cachetime/sec
+    sendmail_queue_t         cachetime/sec
+    skipNFSInHostResources   (1|yes|true|0|no|false)
+    realStorageUnits         (1|yes|true|0|no|false)
+    storageUseNFS            1 | 2		(1 = enable, 2 = disable)
+    ignoredisk               name
+    interface_fadeout        interface_fadeout seconds
+    interface_replace_old    interface_replace_old yes|no
+    interface                name type speed
+    sysdescr                 description
+    syslocation              location
+    syscontact               contact-name
+    sysname                  node-name
+    sysservices              NUMBER
+    sysobjectid              OID
+    setserialno              integer
+    disk                     path [ minspace | minpercent% ]
+    includeAllDisks          minpercent%
+    proc                     process-name [max-num] [min-num]
+    procfix                  process-name program [arguments...]
+    pass                     miboid command
+    pass_persist             miboid program
+    load                     max1 [max5] [max15]
+    file                     file [maxsize]
+    dlmod                    module-name module-path
+    proxy                    [snmpcmd args] host oid [remoteoid]
+    logmatch                 logmatch name path cycletime regex
+    swap                     min-avail
+    dontRetainLogs           (1|yes|true|0|no|false)
+    doNotRetainNotificationLogs (1|yes|true|0|no|false)
+    monitor                  triggername [-I] [-i OID | -o OID]* [-e event] expression
+    defaultMonitors          yes|no
+    linkUpDownNotifications  yes|no
+    notificationEvent        eventname notifyOID [-m] [-i OID|-o OID]*
+    setEvent                 eventname [-I] OID = value
+    strictDisman             (1|yes|true|0|no|false)
+    repeat                   repeat period  OID = value
+    cron                     cron * * * * * OID = value
+    at                       at   * * * * * OID = value
+    override                 [-rw] mibnode type value
+    defDomain                application domain
+    defTarget                application domain target
+    engineID                 string
+    engineIDType             num
+    engineIDNic              string
+  In snmp.conf and snmp.local.conf:
+    extraX509SubDir          string
+    x509CRLFile              string
+    tlsAlgorithms            string
+    localCert                string
+    peerCert                 string
+    alias                    NAME TRANSPORT_DEFINITION
+    doDebugging              (1|0)
+    debugTokens              token[,token...]
+    logTimestamp             (1|yes|true|0|no|false)
+    logOption                string
+    mibdirs                  [mib-dirs|+mib-dirs|-mib-dirs]
+    mibs                     [mib-tokens|+mib-tokens]
+    mibfile                  mibfile-to-read
+    showMibErrors            (1|yes|true|0|no|false)
+    commentToEOL             (1|yes|true|0|no|false)
+    strictCommentTerm        (1|yes|true|0|no|false)
+    mibAllowUnderline        (1|yes|true|0|no|false)
+    mibWarningLevel          integerValue
+    mibReplaceWithLatest     (1|yes|true|0|no|false)
+    printNumericEnums        (1|yes|true|0|no|false)
+    printNumericOids         (1|yes|true|0|no|false)
+    escapeQuotes             (1|yes|true|0|no|false)
+    dontBreakdownOids        (1|yes|true|0|no|false)
+    quickPrinting            (1|yes|true|0|no|false)
+    numericTimeticks         (1|yes|true|0|no|false)
+    oidOutputFormat          integerValue
+    suffixPrinting           integerValue
+    extendedIndex            (1|yes|true|0|no|false)
+    printHexText             (1|yes|true|0|no|false)
+    printValueOnly           (1|yes|true|0|no|false)
+    dontPrintUnits           (1|yes|true|0|no|false)
+    hexOutputLength          integerValue
+    dumpPacket               (1|yes|true|0|no|false)
+    reverseEncodeBER         (1|yes|true|0|no|false)
+    defaultPort              integerValue
+    defCommunity             string
+    noTokenWarnings          (1|yes|true|0|no|false)
+    noRangeCheck             (1|yes|true|0|no|false)
+    persistentDir            string
+    tempFilePattern          string
+    noDisplayHint            (1|yes|true|0|no|false)
+    16bitIDs                 (1|yes|true|0|no|false)
+    clientaddr               string
+    clientaddrUsesPort       (1|yes|true|0|no|false)
+    serverSendBuf            integerValue
+    serverRecvBuf            integerValue
+    clientSendBuf            integerValue
+    clientRecvBuf            integerValue
+    noPersistentLoad         (1|yes|true|0|no|false)
+    noPersistentSave         (1|yes|true|0|no|false)
+    noContextEngineIDDiscovery (1|yes|true|0|no|false)
+    timeout                  integerValue
+    retries                  integerValue
+    defDomain                application domain
+    defTarget                application domain target
+    dontLoadHostConfig       (1|yes|true|0|no|false)
+    defSecurityModel         string
+    tsmUseTransportPrefix    (1|yes|true|0|no|false)
+    defAuthType              MD5|SHA
+    defPrivType              DES|AES
+    defSecurityName          string
+    defContext               string
+    defPassphrase            string
+    defAuthPassphrase        string
+    defPrivPassphrase        string
+    defAuthMasterKey         string
+    defPrivMasterKey         string
+    defAuthLocalizedKey      string
+    defPrivLocalizedKey      string
+    defVersion               1|2c|3
+    defSecurityLevel         noAuthNoPriv|authNoPriv|authPriv
+    trustCert                trustCert FINGERPRINT|FILENAME
+  In agentx.conf and agentx.local.conf:
+    agentxsocket             AgentX bind address
+    agentxperms              AgentX socket permissions: socket_perms [directory_perms [username|userid [groupname|groupid]]]
+    agentxRetries            AgentX Retries
+    agentxTimeout            AgentX Timeout (seconds)
+[ec2-user ~]$
+

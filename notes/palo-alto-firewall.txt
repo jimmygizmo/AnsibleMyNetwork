@@ -1,0 +1,35 @@
+https://www.rogerperkin.co.uk/network-automation/ansible/palo-alto-ansible/
+
+DOCS ON THE COLLECTION:
+https://ansible-pan.readthedocs.io/en/latest/
+
+----------------------------------------------------------------------
+
+* This might be the best network simulator to use:
+EVE - The Emulated Virtual Environment For Network, Security and DevOps Professionals
+https://www.eve-ng.net/
+**** UPDATE: It STRONGLY favors a dedicated physical host of some power. It does not look like it can be made to run
+well in an other configuration. See the download and installation docs.
+I will look for an alternative which I can run on macOS or in a container or possibly in an EC2 instance, although
+the docs state clearly that it will probably not work well on AWS/EC2 because it would amount to nested virtualization,
+which is a bad idea. EVE-NG runs its own hypervisor, so running it inside another VM is not wise.
+---------------------------------------------------------------------------
+
+** Cisco Packet Tracer is a possible option, although I am still working out how to connect from outside the application
+into the virtual devices simulated inside of it. This is what I need to use such an emulator/simulator as a source of
+device automation targets against which to develop playbooks etc.
+
+----------------------------------------------------------------------
+
+
+ansible-galaxy collection install paloaltonetworks.panos
+
+
+-----------------------------------------------------------------------
+
+Panorama is a centralized management system that provides global visibility and control over
+multiple Palo Alto Networks next generation firewalls through an easy to use web-based interface.
+** Panorama settings are made immediately after DNS, which are some of the first settings to put in place.
+
+---------------------------------------------------------------------
+
