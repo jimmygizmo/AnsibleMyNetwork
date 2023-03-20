@@ -1,0 +1,38 @@
+Conclusion from below research:
+Pursue GNS3 for automation dev emulator targets. Containerization looks to be well supported too. Great!
+TODO: Update here after some trial runs.
+- - - -
+
+Development and testing requires real target devices or emulators capable of the complete behavior/functionality being developed. Simulators are helpful but since they generally cannot be connected to and interacted with outside of the simulation, they are of limited use. This document captures the research and evauation of various options, with focus in emulation.
+
+The challenge is that many of the solutions require dedicated hardware that a lot of developers no longer have available as a rule (windows and physical hardware hosts .. many devs are on macOS and the cloud nowadays) .. so that's big issue right there.
+
+https://www.cbtnuggets.com/blog/career/career-progression/5-best-network-simulators-for-cisco-exams-ccna-ccnp-and-ccie
+
+Some to look at:
+
+-------------------------------------------------------------
+GNS3 - 
+** GNS3 looks like the one at the moment.
+https://docs.gns3.com/docs/emulators/docker-support-in-gns3
+-------------------------------------------------------------
+
+
+Cisco Packet Tracer - So far no way to connect to simulated devices, but CLI sim is very valuable for capturing cmds in what would seem to be almost any scenario needed. This can go a long way for sure. Packet tracer has a few minor usage issues, moreso on macOS it seems, but is generally stable and an amazing and powerful application for learning, experimentation and also assessment. For my automation dev purposes, I will be using the CLI for specific devices. If I could actually connect to those and simulate automation, that would be very helpful, but I suspect that may not end up being possible, because this is a comprehensive simulator, that does not necessarily offer any actual emulation, specifically for outside connections.
+
+
+Boson NetSim - Specific to Cisco - I don't see any sign of emulation capabilities, but my guess this would be a good simulator and training path, esp for macOS. Looks like a great company, software and training/edu, but I need emulators at the moment for automation dev/test.
+https://www.boson.com/netsim-cisco-network-simulator
+**** Boson has some cool tools!!
+https://calculator.boson.com/calculator
+Beautiful, simple, clean webapp for IP Subnet Calc and a lot more. Love it.
+
+
+VIRL -  (legacy name) - NEW NAME: Cisco Modeling Labs - Personal
+Docs immediately indicate high hardware requirements and also it looks like mostly a paid product.
+GNS3 remains the option of focus.
+
+
+EVE-NG - initial look indicates cost and sys requirements are very limiting. GNS3 looks far better in these are other respects, but if hardware and cost were not an issue then EVE-NG would need a much closer look.
+
+

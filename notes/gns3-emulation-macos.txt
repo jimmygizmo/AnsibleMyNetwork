@@ -1,0 +1,37 @@
+https://docs.gns3.com/docs/getting-started/installation/mac/
+
+https://www.youtube.com/watch?v=OFjt3jS3Mhg
+
+https://www.gns3.com/community/featured/gns3-vm-is-not-on-the-same-netwo
+
+UPDATE:
+Working well so far but have not yet connected to anything from
+outside:
+VMWare Fusion running GNS3 VM on macOS, upgrade to latest vers
+on everything from above video.
+GNS3 connects to VM and works well with one known warning about
+not being on the same network.
+Found and importes two Cisco router images from unoffical sources
+after virus scanning them. (* Cisco makes it far too difficult
+to obtain official images from them from simply doing some
+dev automation or test work.) But there were no errors importing,
+instantiating and starting those.
+Also successfully downloaded a template for Network Automation
+from GNS3 matketplace but the comments section for it indicate
+a lot of issues and it looks like little more than a containerized
+Ansible but also includes 3 other automation packages which
+I started looking at closely.
+
+The real proof that GNS3 will be very valuable for my plan to use
+it for targeting automation dev/test is when I can connect to
+it and/or when/if I can mount an externally-maintained Ansible
+inside of it (for similar goals.)
+
+My guess is this will be possible and I may acheive that shortly.
+The CPU usage is a bit high, well it is very high, but not to
+the extreme and may prove to be workable even on an older
+laptop.
+A cheap gaming PC might be a great option to run GNS3 locally.
+It looks like and incredibly powerful tool for Network
+professionals.
+
