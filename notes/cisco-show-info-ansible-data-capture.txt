@@ -22,7 +22,8 @@ https://blog.noblinkyblinky.com/2020/10/26/capturing-show-output-with-ansible/
 
        - name: save output to local directory
          copy:
-           content: "{{ config.stdout | replace('\\n', '\n') }}"           dest: "show-output/{{ inventory_hostname }}.ios"
+           content: "{{ config.stdout | replace('\\n', '\n') }}"
+         dest: "show-output/{{ inventory_hostname }}.ios"
  ...
 
 IN GENERAL, network_cli:

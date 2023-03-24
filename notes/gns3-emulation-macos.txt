@@ -12,7 +12,7 @@ https://www.gns3.com/community/featured/gns3-vm-is-not-on-the-same-netwo
 
 **** UPDATE: I have now tried or investigated many of the options in-depth with the goal of connecting to emulated devices
 from the given emulation environment. This is not readily supported and/or working in the two main free
-options for personal systems (laptop laptop or on the metal host machine): Cisco Packet Trace and GNS3.
+options for personal systems (local laptop or on the metal host machine): Cisco Packet Trace and GNS3.
 Extensive worked failed to acheive outside connectivity over wireless at least. There is still some possibility
 of using physical ethernet, but at that point it might make sense to bring up a cheap PC.
 Yes, PHYSICAL host, not a VM instance locally or in the cloud. You still have to run a VM, probably VMWare

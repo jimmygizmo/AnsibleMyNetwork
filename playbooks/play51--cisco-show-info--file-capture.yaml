@@ -10,24 +10,29 @@
   connection: network_cli
   tasks:
     ####
-    - name: T01 - Show run
+    - name: T01 - Show Info Command Sequence (Cisco) - run, ip route, ip eigrp neighbors, version
       ios_command:
         commands:
           - show run
           - show ip route
           - show ip eigrp neighbors
           - show version
-        register: config
+        register: out_show_commands
     ####
-    - name: T02 - Save output to local directory
+    - name: T01-out - Save Output to Local Directory ./outdir-p51-t01/_inventory_hostname_.ios
       copy:
-        content: "{{ config.stdout | replace('\\n', '\n') }}"
-      dest: "show-output/{{ inventory_hostname }}.ios"
+        content: "{{ out_show_commands.stdout | replace('\\n', '\n') }}"
+      dest: "outdir-p51-t01/{{ inventory_hostname }}.ios"
     ####
 
 ...
 
+
+# TODO: Test: Does the output directory need to pre-exist?  ./outdir-p51-t01/
+#   This can be tested with any playbook so we don't need to wait for a device or an emulator.
+
 # Source indicates this is for Cisco Routers but what about other Cisco devices?
 #  All IOS versions?
-# TODO: Give the task a better name.
+
+# https://blog.noblinkyblinky.com/2020/10/26/capturing-show-output-with-ansible/
 

@@ -9,11 +9,27 @@ REGARDING, THE COMMAND, INSIDE THE PROJECT BASE DIR, INSIDE THE VE (ve.ansimy):
 **** IMPORTANT. Pay attention to what lives under ~/.ansible/
 Everything here will be shared accross the USER, no matter what Python V.E. is used. FOR THIS REASON, a containerized
 deployment becomes more attractive. When doing local development, running Ansible in local Python Virtual Environments,
-always remember you may be using and referencing resources under ~/.ansible/ AND REMEMBER that there is potential for
-confusion and even conflict because of this. One might want to delete ~/.ansible/ when switching between Ansiible
-projects (if you are working on multiple and using multiple VEs. If you delete it, then you will want to also delete
-and recreate your VE to do everything cleanly and free of conflict. If you are doing this a lot, there is another reason
-to use a container. On my GitHub, I have now or will soon have CONTAINERIZED versions of my Ansible projects.
+always remember you may be using and referencing resources under ~/.ansible/
+For consistency and if this would not happen too frequently; one might want to delete ~/.ansible/ when switching
+between Ansible projects where you are changing and/or validating the installation of dependencies, etc.
+(if you are working on multiple Ansible projects and using multiple VEs. If you delete ~/.ansible/ then you will
+also want to delete and recreate your VE, so everything is done cleanly and with a low risk of any conflicts.
+If you are doing this a lot, there is another reason to use a container.
+
+ABOUT CONTAINERIZATION AND DUAL MODE PROJECTS: (This is a bit of a stream of consciousness. These are notes.)
+On my GitHub, I have now or will soon have CONTAINERIZED variants of my Ansible projects or I might completely
+containerize these projects, because it is easy to use a containerized project in the standalone mode if it has
+been set up that way. Most or all web app stacks are like this, and Ansible projects should be too; such that
+one can run in a local dev mode in a VM and instantly switch to a docker compose stack or single container and
+even push that to run/test elsewhere all by running a few different scripts and commands.
+It is clear to me that Ansible projects are perfect for this just like web apps are .. trivial switching between
+running in a local VM, running locally in compose or pushing to repo to deploy elsehere; with all these options as
+simple and fast as typing a different command. (minus a minute or three for docker build and maybe push etc.)
+Decision made: All Ansible projects will be containerized by default, but with local operation in a Virtual
+Environment as simple to use as in a pure standalone project. Really there will be no difference; it will be the
+best of both worlds of local VE mode and docker/compose mode (local or remote). Seamless, possibly with help from
+a few shell commands similar to automation I use in web app stacks.
+
 
 ** UPDATE/CLARIFICATION: It is possible that ansible-core installs all of its standard/default collections within
  the V.E. and that ansible-galaxy installs its collections in the user home directory under ~/.ansible/

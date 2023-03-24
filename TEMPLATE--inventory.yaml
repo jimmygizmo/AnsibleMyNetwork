@@ -3,7 +3,7 @@
 groupmain:
   vars:
     ansible_connection: ssh
-    ansible_user: ec2-user
+    ansible_user: todo--username-will-need-to-be-specified-per-device-groupings--not-here
   hosts:
     localhost:
       ansible_host: 127.0.0.1
@@ -23,4 +23,9 @@ groupmain:
     ####
 
 ...
+
+# The following group names are in some playbooks in the comments as placeholders and if groups
+# like this are created in the project's inventory, then these names should be used for consistency:
+# groupcisco, groupcheckpoint, grouppaloalto
+#
 

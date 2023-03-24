@@ -13,7 +13,7 @@
     ####
     - name: T01 - First Connect - admin/admin
       palo_provider:
-        api_key: LUFRPT14MW5xOEo1R09KVlBZNnpnemh0VHRBOWl6TGM9bXcwM3JHUGVhRlNiY0dCR0srNERUQT09
+        api_key: fakeAPIkey5xOEo1R09KVlBZNnpnemh0VHRBOWl6TGM9bXcwM3JHUGVhRlNiY0dCR0fakeAPIkey
 #        api_key: {{ device_api_key }}
         ip_address: {{ ansible_host }}
       adminusername: admin
@@ -71,6 +71,7 @@
     ####
 
 ...
+
 
 # NOTE: The API key seen in this alpha-phase code is a fake key. We don't put real keys
 #   in any repo. Care must always be taken to NEVER accidentally add a secret to a repository
