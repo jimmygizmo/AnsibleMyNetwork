@@ -1,0 +1,33 @@
+---
+# play51--checkpoint-basic-config.yaml
+
+- name: Play51 - Cisco - Capture Show Info Output
+  #  vars:
+  #    hosts: groupcisco
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  gather_facts: no
+  connection: network_cli
+  tasks:
+    ####
+    - name: T01 - Show run
+      ios_command:
+        commands:
+          - show run
+          - show ip route
+          - show ip eigrp neighbors
+          - show version
+        register: config
+    ####
+    - name: T02 - Save output to local directory
+      copy:
+        content: "{{ config.stdout | replace('\\n', '\n') }}"
+      dest: "show-output/{{ inventory_hostname }}.ios"
+    ####
+
+...
+
+# Source indicates this is for Cisco Routers but what about other Cisco devices?
+#  All IOS versions?
+# TODO: Give the task a better name.
+

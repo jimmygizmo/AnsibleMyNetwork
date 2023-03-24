@@ -44,6 +44,17 @@ https://www.packettracernetwork.com/features/real-network-connection.html
 * NOTE: There are many other emulation/simulation options to automate/test/dev against, but some have special
 hardware requirements, such as needing a physical Linux or Windows host to run on. Others require a paid license.
 
+**** UPDATE: I have now tried or investigated many of the options in-depth with the goal of connecting to emulated devices
+from the given emulation environment. This is not readily supported and/or working in the two main free
+options for personal systems (laptop laptop or on the metal host machine): Cisco Packet Trace and GNS3.
+Extensive worked failed to acheive outside connectivity over wireless at least. There is still some possibility
+of using physical ethernet, but at that point it might make sense to bring up a cheap PC.
+Yes, PHYSICAL host, not a VM instance locally or in the cloud. You still have to run a VM, probably VMWare
+Fusion, but you really cannot run this inside another Hypervisor. GN3 is not well suited for nested virtualization.
+So, there is some hope but it is NOT EASY to emulate networking devices for developement, such as for automation
+dev or test targets, which is what I need for this project.
+
+
 ---------------------------------------------------------------
 Interesting Cisco Packet Trace video:
 https://www.youtube.com/watch?v=u7ooPBUQj-8

@@ -2,9 +2,26 @@ https://docs.gns3.com/docs/getting-started/installation/mac/
 
 https://www.youtube.com/watch?v=OFjt3jS3Mhg
 
+# GNS3 - Probably not usable on MacOS when Wifi is eth0. Possibly usable when eth0 is wired.
+# Best option is GNS3 but probably on a physical windows/PC host - NOT inside another VM like in the cloud.
+# RECOMMEND: Try a medium-power windows/PC host on physical ethernet .. then GNS3 might be amazing.
+# GNS3 looks amazing, but macOS Wifi has limitiations (security protection) on interface use that seems not
+#  to be possible to overcome.
 https://www.gns3.com/community/featured/gns3-vm-is-not-on-the-same-netwo
 
-UPDATE:
+
+**** UPDATE: I have now tried or investigated many of the options in-depth with the goal of connecting to emulated devices
+from the given emulation environment. This is not readily supported and/or working in the two main free
+options for personal systems (laptop laptop or on the metal host machine): Cisco Packet Trace and GNS3.
+Extensive worked failed to acheive outside connectivity over wireless at least. There is still some possibility
+of using physical ethernet, but at that point it might make sense to bring up a cheap PC.
+Yes, PHYSICAL host, not a VM instance locally or in the cloud. You still have to run a VM, probably VMWare
+Fusion, but you really cannot run this inside another Hypervisor. GN3 is not well suited for nested virtualization.
+So, there is some hope but it is NOT EASY to emulate networking devices for developement, such as for automation
+dev or test targets, which is what I need for this project.
+
+----
+EARLIER UPDATE:
 Working well so far but have not yet connected to anything from
 outside:
 VMWare Fusion running GNS3 VM on macOS, upgrade to latest vers

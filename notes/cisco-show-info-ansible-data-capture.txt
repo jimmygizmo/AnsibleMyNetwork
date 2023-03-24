@@ -1,0 +1,40 @@
+https://blog.noblinkyblinky.com/2020/10/26/capturing-show-output-with-ansible/
+
+* This example was done on a Cisco router, but the lib looks like general purpose
+  'expect' over ssh or something very similar. basic command composing and response
+  parsing with CLI-related features.
+
+---
+   - name: capture show output
+     hosts: routers
+     gather_facts: no
+     connection: network_cli
+
+     tasks:
+        - name: show run
+         ios_command:
+           commands:
+           - show run
+           - show ip route
+           - show ip eigrp neighbors
+           - show version
+         register: config
+
+       - name: save output to local directory
+         copy:
+           content: "{{ config.stdout | replace('\\n', '\n') }}"           dest: "show-output/{{ inventory_hostname }}.ios"
+ ...
+
+IN GENERAL, network_cli:
+COLLECTION: ansible.netcommon
+
+https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/network_cli_connection.html
+
+** This is included in ansible core:
+ansible.netcommon             4.1.0
+**** It looks like this might be like a form of 'expect', for general purpose command
+  and response over ssh.
+
+
+
+
