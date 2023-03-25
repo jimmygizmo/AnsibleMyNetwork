@@ -1,5 +1,5 @@
 ---
-# play71--palo-alto-setup.yaml
+# play71--pa--setup.yaml
 
 - name: Play71 - Palo Alto Networks Device Setup
 #  vars:

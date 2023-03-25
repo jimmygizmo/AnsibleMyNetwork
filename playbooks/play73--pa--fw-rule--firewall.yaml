@@ -1,0 +1,40 @@
+---
+# play73--pa--fw-rule--firewall.yaml
+
+- name: Play73 - Palo Alto Networks - Add Firewall Rule to Firewall
+#  vars:
+#    hosts: grouppaloalto
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: __CONNECTION__TBD__
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    ####
+    - name: T01 - Add Test Rule 1 to Firewall
+      panos_security_rule:
+        provider: ''
+        rule_name: 'Ansible test 1'
+        description: 'An Ansible test rule'
+        source_zone: ['internal']
+        destination_zone: ['external']
+        source_ip: ['1.2.3.4']
+        source_user: ['any']
+        destination_ip: ['any']
+        category: ['any']
+        application: ['any']
+        service: ['service-http']
+        hip_profiles: ['any']
+        action: 'allow'
+        commit: 'False'
+      register: out_fw_rule_firewall
+    - name: T01-out
+      debug:
+        var: out_fw_rule_firewall.stdout_lines
+    ####
+
+...
+
+
+# http://paloaltonetworks.github.io/ansible-pan/examples.html
+

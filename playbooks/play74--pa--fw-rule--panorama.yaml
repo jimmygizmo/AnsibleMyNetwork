@@ -1,0 +1,41 @@
+---
+# play74--pa--fw-rule--panorama.yaml
+
+- name: Play74 - Palo Alto Networks - Add Firewall Rule to Panorama
+#  vars:
+#    hosts: grouppanorama
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: __CONNECTION__TBD__
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    ####
+    - name: T01 - Add Test Pre-Rule 1 to Panorama
+      panos_security_rule:
+        provider: ''
+        rule_name: 'Ansible test 1'
+        description: 'An Ansible test pre-rule'
+        source_zone: ['internal']
+        destination_zone: ['external']
+        source_ip: ['1.2.3.4']
+        source_user: ['any']
+        destination_ip: ['any']
+        category: ['any']
+        application: ['any']
+        service: ['service-http']
+        hip_profiles: ['any']
+        action: 'allow'
+        device_group: 'DeviceGroupA'
+        commit: False
+      register: out_fw_rule_panorama
+    - name: T01-out
+      debug:
+        var: out_fw_rule_panorama.stdout_lines
+    ####
+
+...
+
+
+# http://paloaltonetworks.github.io/ansible-pan/examples.html
+

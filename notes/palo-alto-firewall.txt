@@ -1,3 +1,8 @@
+
+** EXCELLENT source for a number of playbooks for Palo Alto firewalls and Panorama:
+http://paloaltonetworks.github.io/ansible-pan/examples.html
+
+
 https://www.rogerperkin.co.uk/network-automation/ansible/palo-alto-ansible/
 
 DOCS ON THE COLLECTION:
