@@ -1,0 +1,33 @@
+---
+# play83--pa--ready-check--firewall.yaml
+
+- name: Play83 - Palo Alto Networks - Check if Firewall is Ready for Configuration (No Pending Jobs)
+#  vars:
+#    hosts: grouppaloalto
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: __CONNECTION__TBD__
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    ####
+    - name: T01 - Check if Firewall is Ready for Configuration
+      panos_check:
+        provider: ''
+      register: out_ready_check
+      until: not out_ready_check|failed
+      retries: 50
+      delay: 5
+# Standard debug output is not directly relevant to this playbook. Output will need some adaptation.
+#    - name: T01-out
+#      debug:
+#        var: out_ready_check.stdout_lines
+    ####
+
+...
+
+
+# This playbook/task might be used to wait for a Firewall to come back up after a restart.
+
+# http://paloaltonetworks.github.io/ansible-pan/examples.html
+

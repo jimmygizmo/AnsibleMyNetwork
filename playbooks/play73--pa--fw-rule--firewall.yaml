@@ -13,20 +13,20 @@
     ####
     - name: T01 - Add Test Rule 1 to Firewall
       panos_security_rule:
-        provider: ''
-        rule_name: 'Ansible test 1'
-        description: 'An Ansible test rule'
-        source_zone: ['internal']
-        destination_zone: ['external']
-        source_ip: ['1.2.3.4']
-        source_user: ['any']
-        destination_ip: ['any']
-        category: ['any']
-        application: ['any']
-        service: ['service-http']
-        hip_profiles: ['any']
-        action: 'allow'
-        commit: 'False'
+        provider: ""
+        rule_name: "Ansible test 1"
+        description: "An Ansible test rule"
+        source_zone: ["internal"]
+        destination_zone: ["external"]
+        source_ip: ["1.2.3.4"]
+        source_user: ["any"]
+        destination_ip: ["any"]
+        category: ["any"]
+        application: ["any"]
+        service: ["service-http"]
+        hip_profiles: ["any"]
+        action: "allow"
+        commit: "False"
       register: out_fw_rule_firewall
     - name: T01-out
       debug:

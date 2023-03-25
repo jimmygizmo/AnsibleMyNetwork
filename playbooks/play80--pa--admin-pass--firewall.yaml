@@ -1,0 +1,30 @@
+---
+# play80--pa--admin-pass--firewall.yaml
+
+- name: Play80 - Palo Alto Networks - Change Admin Password over SSH on Firewall
+#  vars:
+#    hosts: grouppaloalto
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: __CONNECTION__TBD__
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    ####
+    - name: T01 - Change Admin User Password using SSH Protocol
+      panos_admpwd:
+        ip_address: ""
+        password: ""
+        newpassword: ""
+        key_filename: ""
+      register: out_admin_pass_firewall
+    - name: T01-out
+      debug:
+        var: out_admin_pass_firewall.stdout_lines
+    ####
+
+...
+
+
+# http://paloaltonetworks.github.io/ansible-pan/examples.html
+

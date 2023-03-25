@@ -25,11 +25,11 @@
     ####
     - name: T02 - DNS and Panorama Settings
       panos_mgtconfig:
-        provider: '{{ palo_provider }}'
-        dns_server_primary: '{{ dns_primary_ip }}'
-        dns_server_secondary: '{{ dns_secondary_ip }}'
-        panorama_primary: '{{ panorama_primary_ip }}'
-        panorama_secondary: '{{ panorama_secondary_ip }}'
+        provider: "{{ palo_provider }}"
+        dns_server_primary: "{{ dns_primary_ip }}"
+        dns_server_secondary: "{{ dns_secondary_ip }}"
+        panorama_primary: "{{ panorama_primary_ip }}"
+        panorama_secondary: "{{ panorama_secondary_ip }}"
         commit: false
       register: dns_panorama_out
     - name: T02-out
@@ -38,9 +38,9 @@
     ####
     - name: T03 - Alternate Admin User Account
       panos_administrator:
-        provider: '{{ palo_provider }}'
-        admin_username: '{{ adminusername }}'
-        admin_password: '{{ adminpassword }}'
+        provider: "{{ palo_provider }}"
+        admin_username: "{{ adminusername }}"
+        admin_password: "{{ adminpassword }}"
         superuser: true
         commit: false
       register: alt_admin_out
@@ -50,7 +50,7 @@
     ####
     - name: T04 - Set Ethernet1/1 as Static in Outside Zone
       panos_interface:
-        provider: '{{ palo_provider }}'
+        provider: "{{ palo_provider }}"
         if_name: "ethernet1/1"
         mode: "layer3"
         ip: "{{ ip.ethernet1 }}"
@@ -63,7 +63,7 @@
     ####
     - name: T05 - Commit Tasks T01 through T04
       panos_commit_firewall:
-        provider: '{{ palo_provider }}'
+        provider: "{{ palo_provider }}"
       register: commit_1_thru_4
     - name: T05-out
       debug:
@@ -73,11 +73,11 @@
 ...
 
 
-# NOTE: The API key seen in this alpha-phase code is a fake key. We don't put real keys
+# NOTE: The API key seen in this alpha-phase code is a fake key. We don"t put real keys
 #   in any repo. Care must always be taken to NEVER accidentally add a secret to a repository
 #   whether it is private or public, because it is difficult to remove secrets from git
 #   repositories in their entirety without risking corruption of the repository and/or
-#   confusion about the repositories true history of commits etc. Just don't ever add a real
+#   confusion about the repositories true history of commits etc. Just don"t ever add a real
 #   secret, API key, certificate, login, password or any other sensitive information to
 #   a repository. The API key seen in this code is fake and was put here intentionally as
 #   a placeholder.

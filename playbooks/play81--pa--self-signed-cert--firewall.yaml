@@ -1,0 +1,32 @@
+---
+# play81--pa--self-signed-cert--firewall.yaml
+
+- name: Play81 - Palo Alto Networks - Generate Self-Signed Certificate
+#  vars:
+#    hosts: grouppaloalto
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: __CONNECTION__TBD__
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    ####
+    - name: T01 - Generate Self-Signed Certificate
+      panos_cert_gen_ssh:
+        ip_address: ""
+        username: ""
+        password: ""
+        cert_cn: ""
+        cert_friendly_name: ""
+        signed_by: ""
+      register: out_self_signed_cert
+    - name: T01-out
+      debug:
+        var: out_self_signed_cert.stdout_lines
+    ####
+
+...
+
+
+# http://paloaltonetworks.github.io/ansible-pan/examples.html
+
