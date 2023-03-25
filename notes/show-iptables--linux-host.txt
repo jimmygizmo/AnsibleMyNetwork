@@ -1,0 +1,29 @@
+
+This is more of an interesting aside, which should be used for any playbook sets for linux hosts.
+Sometimes there are reasons too look at iptables on your linux host.
+For example, although I have never had any problems with this, I have looked closely at it while troubleshooting
+some difficult networking issues (which turned out to be a silly problem in the end but not until a lot
+of complex troubleshooting ruled out many possible causes as you sometimes are forced to do.) .. so the
+context in my story is one of Docker, Docker Engine and Docker Compose.
+Docker Enginer does some interesting things with iptables to make Docker Networking work.
+And Docker Networking always works really well for me, so there is no trouble here.
+BUT .. if you are stuck on a networking problem, you might be looking at EVERYTHING and you most certainly might
+look closely at something which adds a lot of things to your iptables.
+
+To make a very long story short .. I have some playbooks which collect all possible useful information from a
+Linux host. I will be sure to add this step, to display iptables entries, to my general info playbooks:
+
+printf "\n#### ####  iptables -nvL  -----  PRE DOCKER STARTUP\n"
+iptables -nvL
+
+..... something like Docker starting up happens here. Anything that might manipulate iptables that you want to
+..... investigate.
+
+
+printf "\n#### ####  iptables -nvL  -----  POST DOCKER STARTUP\n"
+iptables -nvL
+
+
+# This note file and the tasks it refers to definitly belong over in my other Ansible project:
+# AnsibleMyEC2, which has much more to do with Linux hosts than this Network Automation project.
+

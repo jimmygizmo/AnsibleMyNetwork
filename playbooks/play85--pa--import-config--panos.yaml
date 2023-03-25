@@ -1,0 +1,41 @@
+---
+# play85--pa--import-config--panos.yaml
+
+- name: Play85 - Palo Alto Networks - Import Configuration File into a PAN-OS Device
+#  vars:
+#    hosts: grouppaloalto
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: __CONNECTION__TBD__
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    ####
+    - name: T01 - Import Configuration File into PAN-OS
+      panos_import:
+        ip_address: ""
+        username: ""
+        password: ""
+        file: ""
+        category: "configuration"
+      register: out_config_file_import
+    - name: T01-out
+      debug:
+        var: out_config_file_import.stdout_lines
+    ####
+
+...
+
+
+# This example refers to PAN-OS. Need to clarify what devices this might NOT cover. What Palo Alto Networks devices
+# might run something other than PAN-OS? Also, since we have some PA playbooks/tasks which specifically target
+# Panorama, I need to see if this config file import also applies, meaning I could group my current 'firewall' and
+# 'panorama' together under 'panos' when this is true (but I do not think it is true.) I think the likely reason
+# is simply that the example's author might use this term loosly for all PA 'devices'. It is possible that all
+# PA devices run PAN-OS (I have not verified this yet) so I could group 'firewall' under 'panos' for SOME tasks,
+# but not when the task only works on 'firewalls' or some other specific device. One thing I am fairly certain
+# about though is that I cannot group 'panorama' under 'panos'. Good naming conventions and the logical semantics
+# behind them are important, even more-so if this project evolves into numerous playbooks as it likely will.
+
+# http://paloaltonetworks.github.io/ansible-pan/examples.html
+
