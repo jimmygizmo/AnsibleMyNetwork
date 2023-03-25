@@ -2,7 +2,8 @@
 NOTE: As might be expected, Ansible collections are installed as Python modules as you can see by the
 path below ( within the VE Python: ....site-packages/ansible_collections)
 
-REGARDING, THE COMMAND, INSIDE THE PROJECT BASE DIR, INSIDE THE VE (ve.ansimy):
+This was run from the project base dir, but anywhere inside the project should work the same because
+ the VE is active everywhere inside the project (ve.ansimy) thanks to Pyenv:
 > ansible-galaxy collection install paloaltonetworks.panos
 
 
