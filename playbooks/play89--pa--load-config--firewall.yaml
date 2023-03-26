@@ -1,0 +1,115 @@
+---
+# play89--pa--load-config--firewall.yaml
+
+# TODO: Source example mentions frequently that this is specific to a firewall,
+# but most of the commands are just from the panos library. I could
+# categorize this playbook under 'firewall' but I need to see if this does apply the
+# same to all panos devices as it might. Then if that is confirmed, I would
+# use the 'panos' category for this playbook. This remains TBD.
+
+- name: Play89 - Palo Alto Networks - Load/Import Configuration File Into Firewall
+#  vars:
+#    hosts: grouppaloalto
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: local
+  gather_facts: False
+  vars:
+    cfg_file: candidate-template-empty.xml
+  roles:
+    - role: PaloAltoNetworks.paloaltonetworks
+# The following 'collections' entry is in all other PA playbooks, but not in the source example for this playbook.
+# The precise situation is TBD as most playbooks and tasks in this project have not yet been completely tested.
+#  collections:
+#    - paloaltonetworks.panos
+  tasks:
+    ####
+    - name: T01 - Retreive Credentials from Ansible Vault
+      include_vars: "firewall-secrets.yml"
+      no_log: "yes"
+      register: out_get_secrets
+    - name: T01-out
+      debug:
+        var: out_get_secrets.stdout_lines
+    ####
+    - name: T02 - Wait for SSH port 22 - Timeout 10 minutes
+      wait_for: port=22 host="" search_regex=SSH timeout=600
+      register: out_wait_ssh
+    - name: T02-out
+      debug:
+        var: out_wait_ssh.stdout_lines
+    ####
+    - name: T03 - Ready Check (PAN-OS) - 10 Retries, Delay 10 Seconds - panos_check
+      panos_check:
+        provider: ""
+      register: out_ready_check
+      until: not out_ready_check|failed
+      retries: 10
+      delay: 10
+      # This output is not very useful in this task. Just following the pattern. More useful output might come from
+      # the failure cases inside the retry, if we can get that. Should be doable.
+    - name: T03-out
+      debug:
+        var: out_ready_check.stdout_lines
+    ####
+    - name: T04 - Import Configuration File - panos_import
+      panos_import:
+        ip_address: ""
+        username: ""
+        password: ""
+        file: ""
+        category: "configuration"
+      register: out_import_config
+    - name: T04-out
+      debug:
+        var: out_import_config.stdout_lines
+    ####
+    - name: T05 - Load Configuration - panos_loadcfg
+      panos_loadcfg:
+        ip_address: ""
+        username: ""
+        password: ""
+        file: ""
+        commit: False
+      register: out_load_config
+    - name: T05-out
+      debug:
+        var: out_load_config.stdout_lines
+    ####
+    - name: T06 - Set Admin Password - panos_administrator
+      panos_administrator:
+        provider: ""
+        admin_username: "admin"
+        admin_password: ""
+        superuser: True
+        commit: False
+      register: out_set_admin_pass
+    - name: T06-out
+      debug:
+        var: out_set_admin_pass.stdout_lines
+    ####
+    - name: T07 - Commit (blocks until finished) - panos_commit
+      panos_commit:
+        provider: ""
+      register: out_commit
+    - name: T07-out
+      debug:
+        var: out_commit.stdout_lines
+    ####
+
+
+...
+
+
+# TODO: Confirm delay unit for panos_check is seconds. (confirm 10 seconds)
+
+# Example source notes: Loads firewall configuration from a configuration file.
+#  So this is supposed to be specific to firewall devices. What else possibly?
+
+# TODO: THIS PLAYBOOK NEEDS A NEW TEMPLATE FILE: candidate-template-empty.xml
+# TODO: AND ANOTHER ONE, WHICH IS A SECRETS FILE: /secrets/firewall-secrets.yml
+#   This is an Ansible Vault file.
+# See source example for details on the candidate-template.. (config) file or refer to PA docs.
+
+# http://paloaltonetworks.github.io/ansible-pan/examples.html
+

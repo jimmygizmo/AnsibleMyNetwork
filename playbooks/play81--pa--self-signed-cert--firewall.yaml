@@ -1,7 +1,7 @@
 ---
 # play81--pa--self-signed-cert--firewall.yaml
 
-- name: Play81 - Palo Alto Networks - Generate Self-Signed Certificate
+- name: Play81 - Palo Alto Networks - Generate Self-Signed Certificate (Category TBD)
 #  vars:
 #    hosts: grouppaloalto
   # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
@@ -27,6 +27,17 @@
 
 ...
 
+
+# NOTE: This playbook might only apply to firewalls but this has not been 100% confirmed. There is a chance that
+# it applies to other devices or to panos in general. RE categories 'panos' vs. 'firewall'
+
+# TODO: Clarify category: firewall? panos? Rename the playbook if it will be categorized under panos.
+# TODO: Test and confirm whether or not we need to add paramiko to the requirements file OR if the ansible-galazy
+#   install includes its own paramiko under its own install dirs (~/.ansible/)
+
+# Notes from source example: "This module generates a self-signed certificate that can be
+#  used by GlobalProtect client, SSL connector, or otherwise. Root certificate must be
+#  preset on the system first. This module depends on paramiko for ssh."
 
 # http://paloaltonetworks.github.io/ansible-pan/examples.html
 
