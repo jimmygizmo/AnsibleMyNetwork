@@ -1,0 +1,35 @@
+---
+# play87--pa--dhcp-on-dataport.yaml
+
+- name: Play87 - Palo Alto Networks - Configure Data Port to use DHCP (Default is Static)
+#  vars:
+#    hosts: grouppaloalto
+  # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
+  hosts: "{{ hosts }}"
+  connection: __CONNECTION__TBD__
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    ####
+    - name: T01 - Configure Data Port to use DHCP - Enable DHCP Client on Ethernet1/1 in Zone External
+      panos_interface:
+        provider: ""
+        if_name: "ethernet1/1"
+        zone_name: "external"
+        create_default_route: "yes"
+        commit: False
+      register: out_dhcp_on_dataport
+    - name: T01-out
+      debug:
+        var: out_dhcp_on_dataport.stdout_lines
+    ####
+
+...
+
+
+# NOTE: The source example did not specify a device type like firewall, nor did it specify panos or panorama.
+# This probably applies to multiple device types or maybe even all PA device types.
+# Notes from example: "Configure data-port (DP) network interface for DHCP. By default DP interfaces are static."
+
+# http://paloaltonetworks.github.io/ansible-pan/examples.html
+

@@ -1,9 +1,9 @@
 ---
-# play83--pa--ready-check--firewall.yaml
+# play83--pa--ready-check--panos.yaml
 
-- name: Play83 - Palo Alto Networks - Check if Firewall is Ready for Configuration (No Pending Jobs)
+- name: Play83 - Palo Alto Networks - Check if Firewall (PAN-OS Device) is Ready for Configuration (No Pending Jobs)
 #  vars:
-#    hosts: grouppaloalto
+#    hosts: grouppanos
   # Usage: Pass a valid host or a group on the command line via the argument 'hosts'.
   hosts: "{{ hosts }}"
   connection: __CONNECTION__TBD__
@@ -11,7 +11,7 @@
     - paloaltonetworks.panos
   tasks:
     ####
-    - name: T01 - Check if Firewall is Ready for Configuration
+    - name: T01 - Check if Firewall (PAN-OS Device) is Ready for Configuration
       panos_check:
         provider: ''
       register: out_ready_check
@@ -26,6 +26,11 @@
 
 ...
 
+
+# The source example refers to BOTH a firewall and just a generic panos device, so I will categorize this under
+# panos in this project. The relevant notes from the source example are here:
+# "Check if PAN-OS device is ready for being configured (no pending jobs).
+#  The check could be done once or multiple times until the device is ready."
 
 # This playbook/task might be used to wait for a Firewall to come back up after a restart.
 
