@@ -1,0 +1,8 @@
+This has repo many Palo Alto Networks playbooks.
+
+Before I customize any more from other sources, I need to look at these and select the most
+relevant ones and also look at how vars are abstracted and related files are loaded and/or saved.
+
+https://github.com/PaloAltoNetworks/ansible-pan/tree/master/examples
+
+
