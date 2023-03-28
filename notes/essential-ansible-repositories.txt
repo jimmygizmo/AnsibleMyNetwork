@@ -1,0 +1,63 @@
+Ansible's official repositories have a wealth of stuff for both playbooks, and Python applications and modules
+integrating YAML and playbooks .. with lots and lots of device and vendor specific plays etc.
+
+AnsibleMyNetwork is at the point to move from the BASH/ZSH run scripts (which are nice and simple and will not
+be eliminated) .. into more powerful Python command line tools for running playbooks and more. This is just the
+natural progression.
+
+Because of the richness of Python code I see in the Ansible repositories for Cisco, Palo Alto Networks and obviously
+many other vendors, I find it to be perfect timing to start looking a lot closer at these repositories as I
+start writing some Python tools.
+
+I will not be re-inventing the wheel. When I see something really good in the existing Ansible ecosystem, I will
+leverage it in this project appropriately. However, I have many reasons for writing my own playbooks as I do,
+even if they are a direct adaptation of something pre-existing
+in Ansible's repos or other sources, so I may continue to do that, which would not be re-inventing the wheel.
+My tendency is to apply additional levels of organization to playbooks, to enhance their meaningful verbosity, to
+add a standardized approach to outbout and debugging, variable names, playbook and task names and much more.
+There is a lot of value in this, especially when it is time to add higher level abstractions (cmd line tools and
+integration points for Ansible Tower for example) and such, which leverage things like good systematic naming
+conventions. On top of these goals, this is a great way for me to personally learn more about the powerful
+Ansible ecosystem, while adding my own style of value.
+
+These are the Ansible Collections repositories I am most interested in, in order of relevance to me for
+the current work here in AnsibleMyNetwork:
+
+--------------------------------------------
+
+https://github.com/ansible-collections/cisco.ios
+
+--------------------------------------------
+
+https://github.com/ansible-collections/cisco.nxos
+
+--------------------------------------------
+
+https://github.com/ansible-collections/cisco.iosxr
+
+--------------------------------------------
+
+https://github.com/ansible-collections/checkpoint
+
+--------------------------------------------
+
+https://github.com/ansible-collections/ansible.netcommon
+
+--------------------------------------------
+
+https://github.com/ansible-collections/community.docker
+
+--------------------------------------------
+
+https://github.com/ansible-collections
+
+--------------------------------------------
+
+ALSO, IN P.A.N. REPO, SEPARATE FROM THE Ansible Collections REPOS, FOR PALO ALTO NETWORKS:
+https://github.com/PaloAltoNetworks/pan-os-ansible
+
+CHECKPOINT GAIA REPOSITORY:
+https://github.com/CheckPointSW/CheckPointAnsibleGAIACollection
+WHICH IS FOR THE CHECKPOINT ANSIBLE GALAXY COLLECTION:
+https://galaxy.ansible.com/check_point/gaia
+

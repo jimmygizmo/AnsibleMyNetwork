@@ -1,8 +1,23 @@
 # requirements.txt
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 ansible
 
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # For AWS (only if you need to automate against AWS):
 # boto3
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Pexpect is for 'classic' command-response (simulation of a manual operator) over SSH or telnet.
+# This is not installed here for use with Ansible, but for use with pure Python automation of device CLIs
+# over SSH or telnet.
+pexpect
+
+# https://pexpect.readthedocs.io/en/stable/
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

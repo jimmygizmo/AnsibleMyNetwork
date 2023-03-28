@@ -1,0 +1,51 @@
+
+My GNS3 update on usage of router or switch images for CLI automation development:
+Prior efforts were focused on getting networking to working between inside the GNS emilated topology and the
+local network of the host/laptop and/or even better, other hosts on the outside (LAN mostly) for automation
+development. But GNS3 promises to be amazing for so many things, but alas getting things to work is a real
+uphill battle, in many cases probably not worth the effort in the midst of so much undocumented complexity and
+buggy hit-or-miss behavior with additional platform-specific (macOS, WiFi) challenges. Using GNS3 to it's full
+potential seems practically impossible or at the least it takes so much time and effort that a paid alternative
+is looking attractive now. GNS3 was the last free hope. It is still very valuable and useful, but I am finding
+myself searching for the small parts of it which do work and totally abandoning larger more complex goals because
+each step is very challenging or impossible to get working so far. Only small parts work in limited scenarios,
+especially if you are relying on sort of random (but virus scanned) device images from around the Internet.
+Again, the paywalls in this area of technology are really a huge barrier to learning, but that seems to be the
+way it is. This is not an open source ecosystem. It seems even the tools for learning all require licenses and
+payment, especially for Cisco.
+
+I tried images for 4 Cisco routers, just trying to use the CLI over console/telnet. Only one worked.
+Three others just hung at the 'Press ENTER to get prompt.' which seems to be the stopping point for a lot of people.
+
+TODO: Update here with a link to the one that worked. No point linking the others until perhaps they can be made
+to work. So all three of the "bad" ones all hang after the telnet connection establishment output (6-10 lines) that
+says 'Press ENTER to get prompt.' The routers for which I could not get my (questionable) images to work were:
+c3600, c3725, c3745
+
+The image that works is for this model: c7200
+So let's look closer at this model for a second. Sold through 2015, supported through 2019, first sold pre 1999 possibly.
+"The Cisco 7200 Series Routers, including the 7201, 7202, 7204, 7204VXR, 7206, and 7206VXR models, are no longer supported."
+But these have had a LONG run and so are probably a great choice to learn from. Look like mid to large corporate usage.
+
+https://www.cisco.com/c/en/us/support/routers/7200-series-routers/series.html
+
+-----------------------------------------------------------------------------------------
+ASIDE: A TRIED AND TRUE AUTOMATION METHOD - PYTHON AND EXPECT OVER SSH (CISCO EXAMPLE):
+https://www.electricmonk.nl/log/2014/07/26/scripting-a-cisco-switch-with-python-and-expect/
+
+Nice to see an example and confirmation of what I know. Anything that can be typed and read from responses,
+can be fully automated with Python and Expect and similar strategies which emulate the operator manually
+configuring the device using its native CLI and typing commands and reacting to responses over an SSH or Telnet
+comnnection.
+
+https://pexpect.readthedocs.io/en/stable/
+
+
+* This was just an aside, relevant to Cisco, but now back to the specifics on the CLI on the 7200
+-----------------------------------------------------------------------------------------
+
+
+
+
+
+
