@@ -1,0 +1,20 @@
+
+
+Python and Jinja2 Cisco Network Automation
+https://www.youtube.com/watch?v=nxuE3pm4Rtc
+
+https://github.com/hpreston/python_networking/tree/master/csv_config_gen
+
+
+Python, Genie and CSV Files = Easy Network Automation (DevNet)
+https://www.youtube.com/watch?v=23hPg88pZBo
+
+
+Ansible Network Automation
+https://www.youtube.com/watch?v=2W_YE0fZs88
+
+
+Introduction to Ansible for Network Engineers
+https://www.youtube.com/watch?v=zhgZbaqL3Rk
+
+

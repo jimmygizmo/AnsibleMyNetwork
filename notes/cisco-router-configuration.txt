@@ -29,6 +29,10 @@ But these have had a LONG run and so are probably a great choice to learn from. 
 
 https://www.cisco.com/c/en/us/support/routers/7200-series-routers/series.html
 
+OVERVIEW
+https://www.cisco.com/c/en/us/products/collateral/routers/7200-series-routers/product_data_sheet09186a008008872b.html
+
+
 -----------------------------------------------------------------------------------------
 ASIDE: A TRIED AND TRUE AUTOMATION METHOD - PYTHON AND EXPECT OVER SSH (CISCO EXAMPLE):
 https://www.electricmonk.nl/log/2014/07/26/scripting-a-cisco-switch-with-python-and-expect/
@@ -43,6 +47,25 @@ https://pexpect.readthedocs.io/en/stable/
 
 * This was just an aside, relevant to Cisco, but now back to the specifics on the CLI on the 7200
 -----------------------------------------------------------------------------------------
+
+https://www.youtube.com/watch?v=fURwhooNZpo
+=======================================================================================================
+Physical interfaces on this 7200: (0 is default and I added 1 and 2 Gig Eth)
+slot 0: C7200-IO-FE
+slot 1: PA-GE
+slot 2: PA-GE
+
+> enable
+
+> show ip interface brief
+
+FROM GNS3 EMULATOR:
+R1#enable
+R1#show ip interface brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            unassigned      YES unset  administratively down down
+GigabitEthernet1/0         unassigned      YES unset  administratively down down
+GigabitEthernet2/0         unassigned      YES unset  administratively down down
 
 
 

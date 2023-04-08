@@ -17,7 +17,7 @@ try:
             child.logfile = sys.stdout
         child.timeout = 4
         child.expect('Password:')
-        
+
     except pexpect.TIMEOUT:
         raise Exception("Couldn't log on to the switch")
 
